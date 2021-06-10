@@ -20,7 +20,7 @@ const constructCalendar = () => {
         }
         if (!!SOCCERDATES.find(object => {
             return referenceDate.getTime() === object.date.getTime()
-        })) {
+        }) && referenceDate >= dateToday) {
             const object = SOCCERDATES.find(object => {
                 return referenceDate.getTime() === object.date.getTime()
             });
@@ -50,15 +50,16 @@ const constructCalendar = () => {
             tableRow.appendChild(tableData);
         } else {
             const tableData = document.createElement(`td`);
-            tableData.className = `p-0 border`
-            tableData.classList.add(`text-muted`, `bg-light`, `p-0`);
-
-            const div = document.createElement(`div`);
-            div.classList.add(`date`, `p-2`);
-            const span = document.createElement(`span`);
-            span.innerHTML = `${referenceDate.getDate()} <br> ${MONTHS[referenceDate.getMonth()]}`
-            div.appendChild(span);
-            tableData.appendChild(div);
+                tableData.className = `p-0 border`
+                tableData.classList.add(`text-muted`, `bg-light`, `p-0`);
+            if (referenceDate >= dateToday) {
+                const div = document.createElement(`div`);
+                div.classList.add(`date`, `p-2`);
+                const span = document.createElement(`span`);
+                span.innerHTML = `${referenceDate.getDate()} <br> ${MONTHS[referenceDate.getMonth()]}`
+                div.appendChild(span);
+                tableData.appendChild(div);
+            }
             tableRow.appendChild(tableData);
         }
         i++;
@@ -71,7 +72,7 @@ const constructCalendar = () => {
 const getDateObjectById = (id) => {
     return SOCCERDATES.find(object => {
         return object.id == id;
-    } );
+    });
 }
 
 const updateSelectedData = (object) => {
