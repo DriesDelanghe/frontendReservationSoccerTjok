@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Tjok Hove - registreer voor de voetbal</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/checkboxStyle.css">
+</head>
+<body onload="fillInPageFromLocalStorage()">
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a href="#" class="navbar-brand">Tjok Hove</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+                    aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Some link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Some link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Some link</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<form method="post" action="/processingpage" name="reservationForm" class="row mx-0">
+    <div class="container-fluid col-10 mx-auto border shadow-sm mt-5 p-3" id="nameContainerParent">
+        <h1 class="display-6">Namen:</h1>
+        <div class="mt-3" id="nameContainer">
+            <div class="row w-100" id="containerName1">
+                <label for="firstName1" class="p-0 form-label col-12 col-md-8 col-lg-7 m-1 row">
+                    <span>Persoon 1:</span>
+                    <div class="input-group p-0">
+                        <input type="text" class="form-control" name="firstName" id="firstName1"
+                               placeholder="Voornaam" onclick="removeErrorStyleName(`firstName1`)">
+                        <input type="text" class="form-control" name="lastName" id="lastName1"
+                               placeholder="Achternaam" onclick="removeErrorStyleName(`lastName1`)">
+                        <button type="button" onclick="removeButton(`containerName1`)"
+                                class="btn col-1">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </label>
+
+            </div>
+        </div>
+        <div class="m-2 row">
+            <button type="button" onclick="addName()"
+                    class="btn btn-success col-12 col-md-5 col-lg-4 col-xl-3 text-center">
+                <i class="fas fa-plus me-2"></i>
+                <span>Naam toevoegen</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="container-fluid col-12 col-md-10 mx-auto border shadow-sm mt-5 p-3" id="calenderDiv">
+        <h1 class="display-6 mb-3">Selecteer je data:</h1>
+        <table class="table table-bordered table-hover" id="dateTable">
+            <thead class="thead-dark">
+            <tr class="text-center">
+                <th scope="col" class="p-0">Zo</th>
+                <th scope="col" class="p-0">Ma</th>
+                <th scope="col" class="p-0">Di</th>
+                <th scope="col" class="p-0">Wo</th>
+                <th scope="col" class="p-0">Do</th>
+                <th scope="col" class="p-0">Vr</th>
+                <th scope="col" class="p-0">Za</th>
+            </tr>
+            </thead>
+            <!--            calendar rows get rendered by javascript-->
+        </table>
+        <div class="container mx-auto" id="selectedData">
+
+        </div>
+    </div>
+
+    <div class="container-fluid col-12 col-md-10 mx-auto border shadow-sm mt-5 p-3" id="emailContainer">
+        <div class="form-check">
+            <input type="checkbox" name="emailConfirmation" value="true" id="emailConfirmation"
+                   class="keep form-check-input" onclick="onConfirmation()">
+            <label for="emailConfirmation">Ik wil graag een bevestigingsmail ontvangen</label>
+        </div>
+        <div id="extraInfo" class="row"></div>
+    </div>
+
+    <div class="container mx-auto col-10 my-4">
+        <input type="submit" value="reserveren" class="btn btn-dark">
+    </div>
+</form>
+
+<!--data script must come before other scripts-->
+<script src="js/data.js"></script>
+<script src="js/CalenderScript.js"></script>
+<script src="js/emailConfirmation.js"></script>
+<script src="js/localStorage.js"></script>
+<script src="js/FormScripts.js"></script>
+<script src="js/NamesScript.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+        integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+        crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/6e9f44a530.js" crossorigin="anonymous"></script>
+</body>
+</html>

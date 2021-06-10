@@ -1,0 +1,40 @@
+/* HIDE CHECKBOX */
+[type=checkbox] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+input.keep[type=checkbox]{
+    position: relative;
+    opacity: 1;
+    width: 1rem;
+    height: 1rem;
+}
+
+.date{
+    min-height: 6rem;
+    width: 100%;
+    height: 100%;
+    border: 1px solid transparent;
+    transition: all 0.1s ease-out;
+}
+
+td{
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+
+/* DATE STYLES */
+[type=checkbox] + .date {
+    cursor: pointer;
+}
+
+/* CHECKED STYLES */
+[type=checkbox]:checked + .date {
+    border: solid 1px rgba(78, 162, 126, 0.75);
+    background-color: rgba(114, 231, 176, 0.5);
+}
