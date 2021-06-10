@@ -28,6 +28,7 @@ const validateForm = (event) => {
     if (!emailInput){
         emailLooksGood = true;
     }
+    console.log(`emailinput = ${emailInput}`, emailLooksGood);
 
     const regex = /\S+@\S+\.\S+/;
     const email = document.getElementById(`email`)

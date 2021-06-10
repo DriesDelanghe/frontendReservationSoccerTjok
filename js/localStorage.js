@@ -3,15 +3,20 @@ const saveToLocalStorage = (form) => {
     const firstNames = [];
     const lastNames = [];
     form.elements.reservation.forEach(checkbox => {
-        if(checkbox.checked) reservationDates.push(checkbox.value);
+        if (checkbox.checked) reservationDates.push(checkbox.value);
     });
-    form.elements.firstName.forEach(string => firstNames.push(string.value));
-    form.elements.lastName.forEach(string => lastNames.push(string.value));
+    if (form.elements.firstName.length > 1) {
+        form.elements.firstName.forEach(string => firstNames.push(string.value));
+        form.elements.lastName.forEach(string => lastNames.push(string.value));
+        localStorage.setItem(`firstName`, firstNames.toString());
+        localStorage.setItem(`lastName`, lastNames.toString());
+    } else {
+        localStorage.setItem(`firstName`, form.elements.firstName.value);
+        localStorage.setItem(`lastName`, form.elements.lastName.value);
+    }
 
-    localStorage.setItem(`firstName`, firstNames.toString());
-    localStorage.setItem(`lastName`, lastNames.toString());
     localStorage.setItem(`reservation`, reservationDates.toString());
-    localStorage.setItem(`emailConfirmation`, `${form.elements.emailConfirmation ? "true" : "false"}`);
+    localStorage.setItem(`emailConfirmation`, `${form.elements.email ? "true" : "false"}`);
     localStorage.setItem(`email`, form.elements.email ? form.elements.email.value : ``);
 }
 
@@ -53,7 +58,7 @@ const fillInPageFromLocalStorage = () => {
         })
     }
 
-    if (emailConfirmation){
+    if (emailConfirmation === `true`) {
         onConfirmation();
     }
 }
