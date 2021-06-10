@@ -24,41 +24,12 @@ const constructCalendar = () => {
             const object = SOCCERDATES.find(object => {
                 return referenceDate.getTime() === object.date.getTime()
             });
-            const tableData = document.createElement(`td`);
-            tableData.className = `p-0 border`;
-
-            const label = document.createElement(`label`);
-            label.htmlFor = `${referenceDate.getDate()}${MONTHS[referenceDate.getMonth()]}`;
-            label.classList.add(`w-100`, `h-100`, `p-0`);
-
-            const input = document.createElement(`input`);
-            input.type = `checkbox`;
-            input.id = label.htmlFor;
-            input.name = `reservation`;
-            input.value = `${referenceDate.getFullYear()}-${referenceDate.getMonth()}-${referenceDate.getDate()}`;
-            input.dateReference = object.id;
-            input.addEventListener(`change`, () => updateSelectedData(object))
-            label.appendChild(input);
-
-            const div = document.createElement(`div`);
-            div.classList.add(`date`, `p-2`);
-            const span = document.createElement(`span`);
-            span.innerHTML = `${referenceDate.getDate()} <br> ${MONTHS[referenceDate.getMonth()]}`;
-            div.appendChild(span);
-            label.appendChild(div);
-            tableData.appendChild(label);
-            tableRow.appendChild(tableData);
+            
+            tableRow.appendChild(createTableDataDate(referenceDate, object, true));
         } else {
-            const tableData = document.createElement(`td`);
-                tableData.className = `p-0 border`
-                tableData.classList.add(`text-muted`, `bg-light`, `p-0`);
+            const tableData = createTableDataDate(null, null, false);
             if (referenceDate >= dateToday) {
-                const div = document.createElement(`div`);
-                div.classList.add(`date`, `p-2`);
-                const span = document.createElement(`span`);
-                span.innerHTML = `${referenceDate.getDate()} <br> ${MONTHS[referenceDate.getMonth()]}`
-                div.appendChild(span);
-                tableData.appendChild(div);
+                tableData.appendChild(createDateDiv(referenceDate));
             }
             tableRow.appendChild(tableData);
         }
@@ -75,13 +46,48 @@ const getDateObjectById = (id) => {
     });
 }
 
+const createTableDataDate = (referenceDate, object, clickable) => {
+    const tableData = document.createElement(`td`);
+    tableData.className = `p-0 border`;
+    if (clickable) {
+        const label = document.createElement(`label`);
+        label.htmlFor = `${referenceDate.getDate()}${MONTHS[referenceDate.getMonth()]}`;
+        label.classList.add(`w-100`, `h-100`, `p-0`);
+
+        const input = document.createElement(`input`);
+        input.type = `checkbox`;
+        input.id = label.htmlFor;
+        input.name = `reservation`;
+        input.value = `${referenceDate.getFullYear()}-${referenceDate.getMonth()}-${referenceDate.getDate()}`;
+        input.dateReference = object.id;
+        input.addEventListener(`change`, () => updateSelectedData(object))
+        label.appendChild(input);
+
+        label.appendChild(createDateDiv(referenceDate));
+        tableData.appendChild(label);
+        return tableData;
+    }
+    tableData.classList.add(`text-muted`, `bg-light`, `p-0`);
+    return tableData;
+
+}
+
+const createDateDiv = (referenceDate) => {
+    const div = document.createElement(`div`);
+    div.classList.add(`date`, `p-2`);
+    const span = document.createElement(`span`);
+    span.innerHTML = `${referenceDate.getDate()} <br> ${MONTHS[referenceDate.getMonth()]}`
+    div.appendChild(span);
+    return div;
+}
+
 const updateSelectedData = (object) => {
     (selectedData.indexOf(object) === -1) ? selectedData.push(object) : selectedData.splice(selectedData.indexOf(object), 1);
     const parentDiv = document.getElementById(`selectedData`);
     parentDiv.innerHTML = ``;
     if (selectedData[0]) {
         const h2 = document.createElement(`h2`);
-        h2.className = `display-6`;
+        h2.className = `display-6 mt-3`;
         h2.innerHTML = `Je geselecteerde data:`;
         parentDiv.appendChild(h2);
         selectedData.sort((a, b) => a.date - b.date);
