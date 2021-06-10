@@ -58,7 +58,7 @@ const createTableDataDate = (referenceDate, object, clickable) => {
         input.type = `checkbox`;
         input.id = label.htmlFor;
         input.name = `reservation`;
-        input.value = `${referenceDate.getFullYear()}-${referenceDate.getMonth()}-${referenceDate.getDate()}`;
+        input.value = `${referenceDate.getFullYear()}-${referenceDate.getMonth()+1}-${referenceDate.getDate()}`;
         input.dateReference = object.id;
         input.addEventListener(`change`, () => updateSelectedData(object))
         label.appendChild(input);
@@ -97,7 +97,7 @@ const updateSelectedData = (object) => {
 
 const constructParagraph = (object) => {
     const paraph = document.createElement(`p`);
-    paraph.className = `fw-light my1 mx-0`;
+    paraph.className = `fw-light my-1 mx-0`;
     paraph.id = `selectedData${object.id}`;
     paraph.innerHTML = `${object.date.getDate()} ${MONTHS[object.date.getMonth()]} <br> Openingsuren: ${object.open} - ${object.closed}`;
     return paraph;
