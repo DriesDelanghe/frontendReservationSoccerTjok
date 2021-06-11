@@ -17,6 +17,7 @@ const createReservationObject = (firstNames, lastNames, reservation, emailConfir
     object.emailConfirmation = emailConfirmation;
     object.email = email;
     object.cookieName = cookieName;
+    object.creationDate = new Date();
     return object;
 }
 
@@ -39,7 +40,7 @@ const valuesFormToCookie = (form) => {
     const hour = formatTime(date.getHours());
     const minutes = formatTime(date.getMinutes());
     const seconds = formatTime(date.getSeconds());
-    const cookieName = `reservation${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}|${hour}:${minutes}:${seconds}`
+    const cookieName = `reservation${date.getDate()}${date.getMonth() + 1}${date.getFullYear()}${hour}${minutes}${seconds}`
     createCookie(cookieName, createReservationObject(firstNames, lastNames, reservationDates, form.elements.emailConfirmation.value, form.elements.email.value || ``, cookieName))
 }
 

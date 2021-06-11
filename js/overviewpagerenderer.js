@@ -4,8 +4,8 @@ const overviewPageFromCookies = () => {
     if (objectList) {
         objectList.forEach(object => {
             const parent = createContainerDiv();
-            const dateParts = object.cookieName.replace(`reservation`, ``).split(`|`);
-            parent.appendChild(constructHeader(`Je reservatie van ${dateParts[0]} om ${dateParts[1]}`));
+            const date = new Date(object.creationDate);
+            parent.appendChild(constructHeader(`Je reservatie van ${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()} om ${formatTime(date.getHours())}:${formatTime(date.getMinutes())}`));
             parent.appendChild(constructPersons(object.firstNames, object.lastNames));
             parent.appendChild(constructDates(object.reservation));
             if (object.emailConfirmation === `true`) {
@@ -13,7 +13,7 @@ const overviewPageFromCookies = () => {
             }
             parent.prepend(createEditButtons(object))
             parentDiv.appendChild(parent);
-            parentDiv.appendChild(createRemoveModal(`Verwijderen van je bestelling geplaatst op ${dateParts[0]} om ${dateParts[1]}`,
+            parentDiv.appendChild(createRemoveModal(`Verwijderen van je bestelling geplaatst op ${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()} om ${formatTime(date.getHours())}:${formatTime(date.getMinutes())}`,
                 `Zeker dat je deze bestelling wilt verwijderen? <br> <span class="fw-bold">Deze actie is permanent</span>`, object));
         });
         return
@@ -42,11 +42,11 @@ const createRemoveForm = (object) => {
     removeInput.className = `btn btn-danger`;
     removeInput.value = `verwijderen`;
     form.appendChild(removeInput);
-    form.addEventListener(`submit`, (event) => removeContainerAndCookie(event, object));
+    form.addEventListener(`submit`, (event) => removeCookie(event, object));
     return form;
 }
 
-const removeContainerAndCookie = (event, object) => {
+const removeCookie = (event, object) => {
     event.preventDefault();
     document.cookie = `${object.cookieName}= ; expires = Thu, 01 Jan 1970 00:00:00 GMT`
     document.getElementById(`reservationForm${object.id}`).submit();
@@ -109,9 +109,10 @@ const createRemoveModal = (title, text, object) => {
 const createEditButtons = (object) => {
     const div = document.createElement(`div`);
     div.className = `container-fluid mx-0 d-flex justify-content-end`;
-    const updateLink = document.createElement(`a`);
+    const updateLink = document.createElement(`btn`);
+    updateLink.type = `button`;
     updateLink.className = `btn btn-dark p-2 mx-3`;
-    updateLink.href = `#`;
+    updateLink.onclick = () => window.location.href = `/tjokregisterpage/registerpage.html?${object.cookieName}`;
     const editIcon = document.createElement(`i`);
     editIcon.className = `fas fa-edit`;
     updateLink.appendChild(editIcon);

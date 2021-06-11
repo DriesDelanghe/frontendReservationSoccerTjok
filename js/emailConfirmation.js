@@ -1,4 +1,4 @@
-const onConfirmation = () => {
+const onConfirmation = (email) => {
     const emailContainer = document.getElementById(`extraInfo`);
 
     if (emailContainer.innerHTML == ``) {
@@ -9,9 +9,7 @@ const onConfirmation = () => {
         emailInput.className = `form-control`
         emailInput.placeholder = `someone@example.com`
         emailInput.name = `email`;
-        if (localStorage.getItem(`email`)){
-            emailInput.value = localStorage.getItem(`email`);
-        }
+        emailInput.value = email || localStorage.getItem(`email`) || ``;
         emailInput.addEventListener(`input`, () => saveEmail());
 
         const label = document.createElement(`label`);

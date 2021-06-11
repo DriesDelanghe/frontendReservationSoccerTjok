@@ -19,7 +19,6 @@ const constructCalendar = () => {
             tableRow.className = `text-end`;
             i = 0;
         }
-        console.log(referenceDate >= dateToday, referenceDate, dateToday);
         if (!!SOCCERDATES.find(object => {
             return referenceDate.getTime() === object.date.getTime()
         }) && referenceDate >= dateToday) {
