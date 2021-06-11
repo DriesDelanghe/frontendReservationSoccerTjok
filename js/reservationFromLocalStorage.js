@@ -1,3 +1,4 @@
+/*
 const fillInDataFromLocalStorage = () => {
     const reservation = convertStringToArray(localStorage.getItem(`reservation`));
     const firstNames = convertStringToArray(localStorage.getItem(`firstName`));
@@ -83,4 +84,4 @@ const convertStringToArray = (string) => {
         return string.split(`,`);
     }
     return null;
-}
+}*/
