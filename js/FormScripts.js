@@ -28,7 +28,6 @@ const validateForm = (event) => {
     if (!emailInput){
         emailLooksGood = true;
     }
-    console.log(`emailinput = ${emailInput}`, emailLooksGood);
 
     const regex = /\S+@\S+\.\S+/;
     const email = document.getElementById(`email`)
@@ -51,13 +50,11 @@ const validateForm = (event) => {
     }
 
     if (!lookingGood && !dateErrorDiv) {
-        console.log(`generating date error`)
         const calendarDiv = document.getElementById(`calenderDiv`);
         calendarDiv.prepend(notLookingGoodMessage(`Er moet minstens 1 datum geselecteerd zijn.`, `dateError`));
     }
 
     if (lookingGood && dateErrorDiv) {
-        console.log(`removing date error`)
         dateErrorDiv.remove();
     }
 
@@ -74,8 +71,8 @@ const validateForm = (event) => {
         return;
     } else {
         valuesFormToCookie(form);
-        saveToLocalStorage(form);
-        //document.querySelector(`form`).submit();
+        localStorage.removeItem(`email`);
+        document.querySelector(`form`).submit();
     }
 }
 

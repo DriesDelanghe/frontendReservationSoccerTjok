@@ -10,7 +10,7 @@
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="css/checkboxStyle.css">
 </head>
-<body onload="fillInPageFromLocalStorage()">
+<body onload="constructCalendar()">
 <!--header placeholder-->
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -36,6 +36,10 @@
         </div>
     </nav>
 </header>
+
+<div class="container mx-auto d-flex justify-content-end mt-3">
+    <a href="overviewpage.html" class="btn btn-dark">Bekijk je reservaties</a>
+</div>
 
 <form method="post" action="/confirmationpage" name="reservationForm" class="row mx-0">
     <div class="container-fluid col-10 mx-auto border shadow-sm mt-5 p-3" id="nameContainerParent">
@@ -106,7 +110,6 @@
 <script src="js/data.js"></script>
 <script src="js/CalenderScript.js"></script>
 <script src="js/emailConfirmation.js"></script>
-<script src="js/localStorage.js"></script>
 <script src="js/FormScripts.js"></script>
 <script src="js/NamesScript.js"></script>
 <script src="js/Cookies.js"></script>

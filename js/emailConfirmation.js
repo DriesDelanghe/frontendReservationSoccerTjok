@@ -28,7 +28,6 @@ const onConfirmation = () => {
 
 const saveEmail = () => {
     const emailInput = document.getElementById(`email`);
-        console.log(`saving in local storage`)
     if (emailInput) {
         localStorage.setItem(`email`, emailInput.value);
     }
