@@ -4,6 +4,7 @@ const constructCalendar = () => {
     const table = document.getElementById(`dateTable`);
 
     const dateToday = new Date();
+    dateToday.setHours(0,0,0,0);
     let referenceDate = new Date();
     referenceDate.setHours(2, 0, 0, 0);
     (dateToday.getDay() > 0) ? referenceDate.setDate(dateToday.getDate() - dateToday.getDay()) : referenceDate.setDate(dateToday.getDate());
@@ -18,13 +19,13 @@ const constructCalendar = () => {
             tableRow.className = `text-end`;
             i = 0;
         }
+        console.log(referenceDate >= dateToday, referenceDate, dateToday);
         if (!!SOCCERDATES.find(object => {
             return referenceDate.getTime() === object.date.getTime()
         }) && referenceDate >= dateToday) {
             const object = SOCCERDATES.find(object => {
                 return referenceDate.getTime() === object.date.getTime()
             });
-            
             tableRow.appendChild(createTableDataDate(referenceDate, object, true));
         } else {
             const tableData = createTableDataDate(null, null, false);
@@ -58,7 +59,7 @@ const createTableDataDate = (referenceDate, object, clickable) => {
         input.type = `checkbox`;
         input.id = label.htmlFor;
         input.name = `reservation`;
-        input.value = `${referenceDate.getFullYear()}-${referenceDate.getMonth()+1}-${referenceDate.getDate()}`;
+        input.value = `${referenceDate.getFullYear()}-${referenceDate.getMonth() + 1}-${referenceDate.getDate()}`;
         input.dateReference = object.id;
         input.addEventListener(`change`, () => updateSelectedData(object))
         label.appendChild(input);
