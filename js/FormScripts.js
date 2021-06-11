@@ -73,8 +73,9 @@ const validateForm = (event) => {
     if (!lookingGood || !namesLookGood) {
         return;
     } else {
+        valuesFormToCookie(form);
         saveToLocalStorage(form);
-        document.querySelector(`form`).submit();
+        //document.querySelector(`form`).submit();
     }
 }
 

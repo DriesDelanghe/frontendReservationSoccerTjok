@@ -22,11 +22,14 @@ const saveToLocalStorage = (form) => {
 
 
 const fillInPageFromLocalStorage = () => {
+    valuesFromCookies();
+
     const reservation = convertStringToArray(localStorage.getItem(`reservation`));
     const firstNames = convertStringToArray(localStorage.getItem(`firstName`));
     const lastNames = convertStringToArray(localStorage.getItem(`lastName`));
     const emailConfirmation = localStorage.getItem(`emailConfirmation`);
     const email = localStorage.getItem(`email`);
+
 
     localStorage.clear()
 
@@ -39,7 +42,7 @@ const fillInPageFromLocalStorage = () => {
             extraFirstNames.splice(0, 1);
             const extraLastNames = [...lastNames];
             extraLastNames.splice(0, 1);
-            extraFirstNames.forEach(firstName => addName(firstName, extraLastNames[extraFirstNames.indexOf(firstName)]))
+            extraFirstNames.forEach((firstName, index) => addName(firstName, extraLastNames[index]))
         }
     }
     constructCalendar();
@@ -59,6 +62,7 @@ const fillInPageFromLocalStorage = () => {
     }
 
     if (emailConfirmation === `true`) {
+        document.getElementById(`emailConfirmation`).checked = true;
         onConfirmation();
     }
 }

@@ -56,7 +56,6 @@ const constructDates = (dates) => {
 
 const dateParaph = (date) => {
     const object = SOCCERDATES.find(object => {
-        console.log(date)
         const dateDate = new Date(date);
         dateDate.setHours(2);
         return dateDate.getTime() === object.date.getTime()
