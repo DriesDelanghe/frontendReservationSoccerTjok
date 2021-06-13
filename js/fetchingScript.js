@@ -1,10 +1,31 @@
 
 const sendFormDataToServer = (url, data) => {
     const xhr = new XMLHttpRequest();
+    console.log(url);
     xhr.onload = () => {
         if (xhr.status >= 200 && xhr.status < 300){
-            /*const response = JSON.parse(xhr.responseText);
-            console.log(response);*/
+            console.log(xhr.responseText)
+        }
+        if (xhr.status >= 400 && xhr.status < 600){
+            const div = createErrorMessage(`Something went wrong, please try again`);
+            if (div) {
+                document.getElementById(`errorDiv`).appendChild(div);
+            }
+        }
+    };
+    console.log(url);
+
+    xhr.open('POST', url);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.send(JSON.stringify(data));
+}
+
+const sendRemoveRequest = (url, object) => {
+    const xhr = new XMLHttpRequest();
+    xhr.onload = () => {
+        if (xhr.status >= 200 && xhr.status < 300){
+            removeCookie(object);
         }
         if (xhr.status >= 400 && xhr.status < 600){
             const div = createErrorMessage(`Something went wrong, please try again`);
@@ -16,8 +37,9 @@ const sendFormDataToServer = (url, data) => {
 
     xhr.open('POST', url);
     xhr.setRequestHeader('Content-Type', 'application/json');
-
-    xhr.send(JSON.stringify(data));
+    const JSONObject = {};
+    JSONObject.id = object.id;
+    xhr.send(JSON.stringify(JSONObject));
 }
 
 const createErrorMessage = (text) => {
