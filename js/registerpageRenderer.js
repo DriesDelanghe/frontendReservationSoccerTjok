@@ -27,7 +27,7 @@ const renderRegisterPage = () => {
             onConfirmation(cookie.email);
         }
 
-        document.querySelector(`form`).action = `/admin/reservation/update`;
+        document.querySelector(`form`).action = `./admin/reservation/update.php`;
 
         return;
     }

@@ -12,6 +12,7 @@ const sendFormDataToServer = (url, data) => {
             }
         }
     };
+    console.log(url);
 
     xhr.open('POST', url);
     xhr.setRequestHeader('Content-Type', 'application/json');

@@ -35,7 +35,7 @@ const overviewPageFromCookies = () => {
 const createRemoveForm = (object) => {
     const form = document.createElement(`form`);
     form.method = `post`;
-    form.action = `/admin/reservation/remove`;
+    form.action = `./admin/reservation/remove.php`;
     form.id = `reservationForm${object.id}`
     const removeInput = document.createElement(`input`);
     removeInput.type = `submit`;
@@ -53,6 +53,7 @@ const formSubmitListenerRemove = (e, object) => {
 
 const removeCookie = (object) => {
     document.cookie = `${object.cookieName}= ; expires = Thu, 01 Jan 1970 00:00:00 GMT`
+    document.getElementById(`reservationForm${object.id}`).submit();
 }
 
 const createRemoveModal = (title, text, object) => {
@@ -115,7 +116,7 @@ const createEditButtons = (object) => {
     const updateLink = document.createElement(`btn`);
     updateLink.type = `button`;
     updateLink.className = `btn btn-dark p-2 mx-3`;
-    updateLink.onclick = () => window.location.href = `/tjokregisterpage/registerpage.html?${object.cookieName}`;
+    updateLink.onclick = () => window.location.href = `./registerpage.html?${object.cookieName}`;
     const editIcon = document.createElement(`i`);
     editIcon.className = `fas fa-edit`;
     updateLink.appendChild(editIcon);
