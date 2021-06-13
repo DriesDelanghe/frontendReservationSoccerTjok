@@ -1,4 +1,4 @@
-const createJSONdata = (form) => {
+const createJSONdata = (form, cookieNameParam) => {
     const reservationDates = [];
     const firstNames = [];
     const lastNames = [];
@@ -36,5 +36,5 @@ const sendFormDataToServer = (url, data) => {
     xhr.open('POST', url);
     xhr.setRequestHeader('Content-Type', 'application/json');
 
-    xhr.send(data);
+    xhr.send(JSON.stringify(data));
 }
