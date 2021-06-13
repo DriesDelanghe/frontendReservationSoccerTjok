@@ -8,7 +8,9 @@ const renderRegisterPage = () => {
 
         document.getElementById(`firstName1`).value = cookie.firstNames[0];
         document.getElementById(`lastName1`).value  = cookie.lastNames[0];
-        if (cookie.firstNames.length > 1) cookie.firstNames.forEach((value, index) => addName(value, cookie.lastNames[index]));
+        if (cookie.firstNames.length > 1) cookie.firstNames.forEach((value, index) => {
+            if (index > 0) addName(value, cookie.lastNames[index])
+        });
 
         const checkboxes = document.getElementById(`calenderDiv`).getElementsByTagName(`input`);
         Array.from(checkboxes).forEach(checkbox => {
