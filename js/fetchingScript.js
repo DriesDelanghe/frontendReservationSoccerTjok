@@ -1,10 +1,10 @@
 
 const sendFormDataToServer = (url, data) => {
     const xhr = new XMLHttpRequest();
+    console.log(url);
     xhr.onload = () => {
         if (xhr.status >= 200 && xhr.status < 300){
-            /*const response = JSON.parse(xhr.responseText);
-            console.log(response);*/
+            console.log(xhr.responseText)
         }
         if (xhr.status >= 400 && xhr.status < 600){
             const div = createErrorMessage(`Something went wrong, please try again`);
