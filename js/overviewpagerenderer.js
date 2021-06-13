@@ -56,7 +56,6 @@ const formSubmitListenerRemove = (e, object) => {
 const removeCookie = (event, object) => {
     event.preventDefault();
     document.cookie = `${object.cookieName}= ; expires = Thu, 01 Jan 1970 00:00:00 GMT`
-    document.getElementById(`reservationForm${object.id}`).submit();
 }
 
 const createRemoveModal = (title, text, object) => {
