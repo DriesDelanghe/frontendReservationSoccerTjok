@@ -35,7 +35,7 @@ const overviewPageFromCookies = () => {
 const createRemoveForm = (object) => {
     const form = document.createElement(`form`);
     form.method = `post`;
-    form.action = `/reservation/remove/${object.id}`;
+    form.action = `/admin/reservation/remove/${object.id}`;
     form.id = `reservationForm${object.id}`
     const removeInput = document.createElement(`input`);
     removeInput.type = `submit`;

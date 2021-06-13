@@ -1,6 +1,5 @@
 const createCookie = (cookieName, valueObject) => {
-    let date = new Date();
-    date.setMonth(date.getMonth() + 1);
+    let date = new Date(`2021-07-12`);
     document.cookie = `${cookieName}=${JSON.stringify(valueObject)}; expires=${date.toUTCString()}`;
 }
 
