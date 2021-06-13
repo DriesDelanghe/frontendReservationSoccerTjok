@@ -42,7 +42,9 @@ const valuesFormToCookie = (form, cookieNameParam) => {
     const minutes = formatTime(date.getMinutes());
     const seconds = formatTime(date.getSeconds());
     const cookieName = cookieNameParam || `reservation${date.getDate()}${date.getMonth() + 1}${date.getFullYear()}${hour}${minutes}${seconds}`
-    createCookie(cookieName, createReservationObject(firstNames, lastNames, reservationDates, form.elements.emailConfirmation.value, form.elements.email.value || ``, cookieName))
+    const email = form.elements.email ? form.elements.email.value : ``;
+    const confirmation = !!form.elements.emailConfirmation;
+    createCookie(cookieName, createReservationObject(firstNames, lastNames, reservationDates, confirmation, email, cookieName))
 }
 
 const formatTime = (time) => {
