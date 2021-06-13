@@ -73,8 +73,7 @@ const validateForm = (event) => {
         const param = getParams(window.location.href);
         param && param.includes(`reservation`) ? valuesFormToCookie(form, param) : valuesFormToCookie(form);
         localStorage.removeItem(`email`);
-        sendFormDataToServer(form.action, createJSONdata(form));
-        //document.querySelector(`form`).submit();
+        document.querySelector(`form`).submit();
     }
 }
 

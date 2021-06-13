@@ -1,4 +1,3 @@
-
 const sendFormDataToServer = (url, data) => {
     const xhr = new XMLHttpRequest();
     console.log(url);
