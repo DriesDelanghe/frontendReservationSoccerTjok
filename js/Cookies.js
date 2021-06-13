@@ -7,10 +7,10 @@ const createReservationObject = (firstNames, lastNames, reservation, emailConfir
     const object = {};
 
     // placeholder id generator, replace this in production enviroment
-    const cookies = document.cookie.split(`;`).find(cookie => {
-        return cookie.includes(`reservation`)
+    const cookies = document.cookie.split(`;`).filter(cookie => {
+        return cookie.includes(`reservation`);
     });
-    object.id = cookies ? valueFromCookie(cookies[cookies.length - 1]).id + 1 : 1;
+    object.id = cookies ? (cookies[cookies.length-1]) ? Number(valueFromCookie(cookies[cookies.length - 1]).id) + 1 : 1 : 1;
 
     object.firstNames = firstNames;
     object.lastNames = lastNames;

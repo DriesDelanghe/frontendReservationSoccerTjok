@@ -42,8 +42,15 @@ const createRemoveForm = (object) => {
     removeInput.className = `btn btn-danger`;
     removeInput.value = `verwijderen`;
     form.appendChild(removeInput);
-    form.addEventListener(`submit`, (event) => removeCookie(event, object));
+    form.addEventListener('submit' , (e) => formSubmitListenerRemove(e, object));
     return form;
+}
+
+const formSubmitListenerRemove = (e, object) => {
+    removeCookie(e, object);
+    const JSONObject = {};
+    JSONObject.id = object.id
+    sendFormDataToServer(e.target.action, JSON.stringify(JSONObject));
 }
 
 const removeCookie = (event, object) => {
