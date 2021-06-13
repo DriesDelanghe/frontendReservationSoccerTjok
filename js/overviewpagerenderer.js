@@ -47,14 +47,11 @@ const createRemoveForm = (object) => {
 }
 
 const formSubmitListenerRemove = (e, object) => {
-    removeCookie(e, object);
-    const JSONObject = {};
-    JSONObject.id = object.id
-    sendFormDataToServer(e.target.action, JSON.stringify(JSONObject));
+    e.preventDefault();
+    sendRemoveRequest(e.target.action, object);
 }
 
-const removeCookie = (event, object) => {
-    event.preventDefault();
+const removeCookie = (object) => {
     document.cookie = `${object.cookieName}= ; expires = Thu, 01 Jan 1970 00:00:00 GMT`
 }
 
